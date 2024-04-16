@@ -59,12 +59,12 @@ public class OrderSpec {
         // создание numberOfOrders кол-во заказов
         for (int i = 0; i < numberOfOrders; i++){
             // запрос на создание заказа
-            OrderSpec.getCreateOrder(order, response.accessToken, 200)
+            OrderSpec.getCreateOrder(order, LogSpecs.accessToken, 200)
                     .assertThat()
                     .body("order.number",notNullValue());
         }
         // выход из учетной записи пользователя
-        LogSpecs.getResponseLogoutUser(response.refreshToken, 200);
+        LogSpecs.getResponseLogoutUser(LogSpecs.refreshToken, 200);
     }
 
     @Step("Получение списка заказов")

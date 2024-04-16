@@ -21,19 +21,20 @@ public class LogSpecs {
     public static String accessToken;
     public static String refreshToken;
 
-    public LogSpecs(boolean success, String message, String accessToken, String refreshToken) {
+    public LogSpecs (boolean success, String message, String accessToken, String refreshToken) {
         this.success = success;
         this.message = message;
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;
     }
 
-    static ObjectMapper mapper = new ObjectMapper();
+    private static ObjectMapper mapper = new ObjectMapper();
+
 
 
     @Step("Создание УЗ")
     public static LogSpecs getResponseCreateUser(UserReg userreg, int statusCode) throws JsonProcessingException {
-        String jsonString = mapper.writeValueAsString(userreg);
+        jsonString = mapper.writeValueAsString(userreg);
         Response response = given().log().all()
                 .header("Content-Type", "application/json")
                 .baseUri(Requests.BASE_URL) // Использование переменной окружения
@@ -45,13 +46,19 @@ public class LogSpecs {
                 .assertThat()
                 .extract()
                 .response();
-        return new LogSpecs(response.path("success"), response.path("message"), response.path("accessToken"), response.path("refreshToken"));
+        success = response.path("success");
+        message = response.path("message");
+        accessToken = response.path("accessToken");
+        refreshToken = response.path("refreshToken");
+        return new LogSpecs(success, message, accessToken, refreshToken);
+
     }
+    
 
 
     @Step("Авторизация УЗ")
     public static LogSpecs getResponseUserAuthorization(UserReg userreg, int statusCode) throws JsonProcessingException {
-        String jsonString = mapper.writeValueAsString(userreg);
+        jsonString = mapper.writeValueAsString(userreg);
         Response response = given().log().all()
                 .header("Content-Type", "application/json")
                 .baseUri(Requests.BASE_URL)
@@ -63,7 +70,11 @@ public class LogSpecs {
                 .assertThat()
                 .extract()
                 .response();
-        return new LogSpecs(response.path("success"), response.path("message"), response.path("accessToken"), response.path("refreshToken"));
+        success = response.path("success");
+        message = response.path("message");
+        accessToken = response.path("accessToken");
+        refreshToken = response.path("refreshToken");
+        return new LogSpecs(success, message, accessToken, refreshToken);
     }
 
     @Step("Выход из УЗ")

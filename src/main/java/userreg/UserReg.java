@@ -43,9 +43,9 @@ public class UserReg {
     //создание "случайного" пользователя без имени
     public static UserReg getRandomUserWithoutName() {
         return new UserReg(
-                "",
+                RandomStringUtils.randomAlphanumeric(10) + "@example.com",
                 "123456",
-                "TestUser_" + RandomStringUtils.randomAlphanumeric(6)
+                ""
         );
     }
 
