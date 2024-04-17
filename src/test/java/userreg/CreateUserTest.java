@@ -39,8 +39,8 @@ public class CreateUserTest {
         user = UserReg.getRandomUserWithoutPassword();
         //создание УЗ пользователя
         LogSpecs response = LogSpecs.getResponseCreateUser(user, 403);
-        assertFalse(response.success);
-        assertEquals(WRONG_CREDS, response.message);
+        assertFalse(LogSpecs.success);
+        assertEquals(WRONG_CREDS, LogSpecs.message);
     }
 
     @Test
@@ -50,8 +50,8 @@ public class CreateUserTest {
         user = UserReg.getRandomUserWithoutName();
         //создание УЗ пользователя
         LogSpecs response = LogSpecs.getResponseCreateUser(user, 403);
-        assertFalse(response.success);
-        assertEquals(WRONG_CREDS, response.message);
+        assertFalse(LogSpecs.success);
+        assertEquals(WRONG_CREDS, LogSpecs.message);
     }
 
     @Test
@@ -61,8 +61,8 @@ public class CreateUserTest {
         user = UserReg.getRandomUserWithoutEmail();
         //создание УЗ пользователя
         LogSpecs response = LogSpecs.getResponseCreateUser(user, 403);
-        assertFalse(response.success);
-        assertEquals(WRONG_CREDS, response.message);
+        assertFalse(LogSpecs.success);
+        assertEquals(WRONG_CREDS, LogSpecs.message);
     }
 
     @Test
@@ -72,11 +72,11 @@ public class CreateUserTest {
         user = UserReg.getRandomUser();
         //создание УЗ пользователя
         LogSpecs initResponse = LogSpecs.getResponseCreateUser(user, 200);
-        userAccessToken = initResponse.accessToken;
-        userCreateSuccess = initResponse.success;
+        userAccessToken = LogSpecs.accessToken;
+        userCreateSuccess = LogSpecs.success;
         //создание УЗ пользователя, который уже зарегистрирован
         LogSpecs response = LogSpecs.getResponseCreateUser(user, 403);
-        assertFalse(response.success);
-        assertEquals(USER_EXIST, response.message);
+        assertFalse(LogSpecs.success);
+        assertEquals(USER_EXIST, LogSpecs.message);
     }
 }

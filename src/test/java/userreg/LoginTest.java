@@ -19,7 +19,8 @@ public class LoginTest {
     @Before
     public void createBeforeUser() throws Exception {
         user = UserReg.getRandomUser();
-        userAccessToken = LogSpecs.getResponseCreateUser(user,200).accessToken;
+        LogSpecs.getResponseCreateUser(user, 200);
+        userAccessToken = LogSpecs.accessToken;
     }
 
     //удаление УЗ пользователя
@@ -35,8 +36,8 @@ public class LoginTest {
         UserReg createdUser = new UserReg(user.getEmail(), user.getPassword());
         //авторизация пользователя
         LogSpecs response = LogSpecs.getResponseUserAuthorization(createdUser, 200);
-        userAccessToken = response.accessToken;
-        userAuthorisationSuccess = response.success;
+        userAccessToken = LogSpecs.accessToken;
+        userAuthorisationSuccess = LogSpecs.success;
         assertTrue(userAuthorisationSuccess);
     }
 
@@ -47,7 +48,8 @@ public class LoginTest {
         //данные для авторизации существующего пользователя
         UserReg createdUser = new UserReg(invalidEmail, user.getPassword());
         //авторизация пользователя
-        userAuthorisationSuccess = LogSpecs.getResponseUserAuthorization(createdUser, 401).success;
+        LogSpecs.getResponseUserAuthorization(createdUser, 401);
+        userAuthorisationSuccess = LogSpecs.success;
         assertFalse(userAuthorisationSuccess);
     }
 
@@ -58,7 +60,8 @@ public class LoginTest {
         //данные для авторизации существующего пользователя
         UserReg createdUser = new UserReg(user.getEmail(), invalidPassword);
         //авторизация пользователя
-        userAuthorisationSuccess =  LogSpecs.getResponseUserAuthorization(createdUser, 401).success;
+        LogSpecs.getResponseUserAuthorization(createdUser, 401);
+        userAuthorisationSuccess = LogSpecs.success;
         assertFalse(userAuthorisationSuccess);
     }
 }

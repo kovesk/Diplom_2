@@ -21,14 +21,7 @@ public class LogSpecs {
     public static String accessToken;
     public static String refreshToken;
 
-    public LogSpecs (boolean success, String message, String accessToken, String refreshToken) {
-        this.success = success;
-        this.message = message;
-        this.accessToken = accessToken;
-        this.refreshToken = refreshToken;
-    }
-
-    private static ObjectMapper mapper = new ObjectMapper();
+    private static final ObjectMapper mapper = new ObjectMapper();
 
 
 
@@ -50,8 +43,7 @@ public class LogSpecs {
         message = response.path("message");
         accessToken = response.path("accessToken");
         refreshToken = response.path("refreshToken");
-        return new LogSpecs(success, message, accessToken, refreshToken);
-
+        return null;
     }
     
 
@@ -74,7 +66,7 @@ public class LogSpecs {
         message = response.path("message");
         accessToken = response.path("accessToken");
         refreshToken = response.path("refreshToken");
-        return new LogSpecs(success, message, accessToken, refreshToken);
+        return null;
     }
 
     @Step("Выход из УЗ")

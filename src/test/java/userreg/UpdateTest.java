@@ -22,7 +22,8 @@ public class UpdateTest {
         //создание пользователя
         user = UserReg.getRandomUser();
         //создание УЗ пользователя
-        userAccessToken = LogSpecs.getResponseCreateUser(user,200).accessToken;
+        LogSpecs.getResponseCreateUser(user, 200);
+        userAccessToken = LogSpecs.accessToken;
     }
 
     //удаление УЗ пользователя
@@ -43,7 +44,8 @@ public class UpdateTest {
         //изменение данных пользователя
         LogSpecs.getResponseUpdateUserData(updatedUser, userAccessToken, 200);
         //авторизация с измененным паролем
-        userAccessToken = LogSpecs.getResponseUserAuthorization(updatedUser, 200).accessToken;
+        LogSpecs.getResponseUserAuthorization(updatedUser, 200);
+        userAccessToken = LogSpecs.accessToken;
         assertThat(userAccessToken, notNullValue());
     }
 
@@ -52,7 +54,8 @@ public class UpdateTest {
     public void nameChangePositive() throws JsonProcessingException {
         UserReg createdUser = new UserReg(user.getEmail(), user.getPassword());
         //авторизация пользователя
-        userAccessToken = LogSpecs.getResponseUserAuthorization(createdUser, 200).accessToken;
+        LogSpecs.getResponseUserAuthorization(createdUser, 200);
+        userAccessToken = LogSpecs.accessToken;
         //изменение имени пользователя
         String updatedName = "123" + user.getName();
         UserReg updatedUser = new UserReg(user.getEmail(), user.getPassword(), updatedName);
@@ -66,7 +69,8 @@ public class UpdateTest {
     public void emailChangePositive() throws JsonProcessingException {
         UserReg createdUser = new UserReg(user.getEmail(), user.getPassword());
         //авторизация пользователя
-        userAccessToken = LogSpecs.getResponseUserAuthorization(createdUser, 200).accessToken;
+        LogSpecs.getResponseUserAuthorization(createdUser, 200);
+        userAccessToken = LogSpecs.accessToken;
         //изменение email пользователя
         String updatedEmail = "123" + user.getEmail();
         UserReg updatedUser = new UserReg(updatedEmail, user.getPassword(), user.getName());
