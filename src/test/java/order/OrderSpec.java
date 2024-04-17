@@ -53,8 +53,6 @@ public class OrderSpec {
         // массив ингредиентов для заказа
         String[] ingredients = new String[]{ingredientsHash.get(0), ingredientsHash.get(ingredientsHash.size() - 1)};
         Order order = new Order(ingredients);
-        // запрос на авторизацию пользователя
-        LogSpecs response = LogSpecs.getResponseUserAuthorization(userreg, 200);
         // создание numberOfOrders кол-во заказов
         for (int i = 0; i < numberOfOrders; i++){
             // запрос на создание заказа

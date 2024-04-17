@@ -33,9 +33,7 @@ public class LoginTest {
     @DisplayName("Успешная авторизация")
     public void successfulUserAuthorization() throws JsonProcessingException {
         //данные для авторизации существующего пользователя
-        UserReg createdUser = new UserReg(user.getEmail(), user.getPassword());
         //авторизация пользователя
-        LogSpecs response = LogSpecs.getResponseUserAuthorization(createdUser, 200);
         userAccessToken = LogSpecs.accessToken;
         userAuthorisationSuccess = LogSpecs.success;
         assertTrue(userAuthorisationSuccess);
