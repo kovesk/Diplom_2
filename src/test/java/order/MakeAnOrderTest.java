@@ -24,7 +24,8 @@ public class MakeAnOrderTest {
         //создание пользователя
         user = UserReg.getRandomUser();
         //создание УЗ
-        userAccessToken = LogSpecs.getResponseCreateUser(user, 200).accessToken;
+        LogSpecs.getResponseCreateUser(user, 200);
+        userAccessToken = LogSpecs.accessToken;
         //валидные хеши ингредиентов
         ingredientsHash = OrderSpec.createListOfIngredients();
     }
@@ -38,7 +39,8 @@ public class MakeAnOrderTest {
     @DisplayName("Успешное создание заказа с авторизацией и двумя ингредиентами")
     public void successfullyCreatingAnOrderWithAuthorizationAndTwoIngredients() throws JsonProcessingException {
         //авторизация пользователя
-        userAccessToken = LogSpecs.getResponseUserAuthorization(user, 200).accessToken;
+        LogSpecs.getResponseUserAuthorization(user, 200);
+        userAccessToken = LogSpecs.accessToken;
         //ингредиенты для заказа (массив)
         ingredients = new String[]{ingredientsHash.get(0), ingredientsHash.get(ingredientsHash.size() - 1)};
         Order order = new Order(ingredients);
@@ -52,7 +54,8 @@ public class MakeAnOrderTest {
     @DisplayName("Неуспешное создание заказа с авторизацией без ингредиентов")
     public void unsuccessfulOrderCreationWithAuthorizationWithoutIngredients() throws JsonProcessingException {
         //авторизацию пользователя
-        userAccessToken = LogSpecs.getResponseUserAuthorization(user, 200).accessToken;
+        LogSpecs.getResponseUserAuthorization(user, 200);
+        userAccessToken = LogSpecs.accessToken;
         Order order = new Order(ingredients);
         //создание заказа
         OrderSpec.getCreateOrder(order, userAccessToken, 400)
@@ -83,7 +86,8 @@ public class MakeAnOrderTest {
     @DisplayName("Тест неуспешного создания заказа с авторизацией и неверным хешем ингредиента")
     public void unsuccessfulOrderCreationWithAuthorizationWithInvalidHashOfIngredients() throws JsonProcessingException {
         //авторизация
-        userAccessToken = LogSpecs.getResponseUserAuthorization(user, 200).accessToken;
+        LogSpecs.getResponseUserAuthorization(user, 200);
+        userAccessToken = LogSpecs.accessToken;
         //невалидный хеш
         ingredients = new String[]{"1234567890asd"};
         Order order = new Order(ingredients);

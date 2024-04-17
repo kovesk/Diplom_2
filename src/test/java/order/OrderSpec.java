@@ -14,7 +14,6 @@ import java.util.ArrayList;
 
 public class OrderSpec {
 
-    private static String jsonString;
     static ObjectMapper mapper = new ObjectMapper();
 
     @Step("Запрос ингредиентов")
@@ -29,7 +28,7 @@ public class OrderSpec {
     @Step("Создание заказа")
     public static ValidatableResponse getCreateOrder(Order order, String userAccessToken,
                                                      int statusCode) throws JsonProcessingException {
-        jsonString = mapper.writeValueAsString(order);
+        String jsonString = mapper.writeValueAsString(order);
         return RestAssured.given().log().all()
                 .headers("Authorization", userAccessToken, "Content-Type", "application/json")
                 .baseUri(Requests.BASE_URL)
